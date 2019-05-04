@@ -15,42 +15,101 @@ var axios = require("axios");
     //     console.log(response.   /*......*/);
     //   }
     // );
+
+// concert-this/spotify-this-song/movie-this/do-what-it-says commands
     
+
+function movieThis(){
+
+
+var userChoice = process.argv[2];
+var seachMovie = process.argv.slice(3).join('+');
+var validInput = checkUserInput()
+
+  if (validInput) {
+    movieUrl();
+}
+
+function checkUserInput() {
+    if(userChoice =="movie-this" || userChoice == "spotify-this-song"
+      || userChoice == "concert-this" || userChoice == "do-what-it-says"){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+function movieUrl() {
+    var url = "http://www.omdbapi.com" + userChoice + "/?i=tt3896198" + seachMovie +
+    "&apikey=2f1e40d4"
+
+    findMovieInfo(url)
+}
+
+
+function findMovieInfo(url) {
+    axios.get(url).then(function(data){
+        // console.log(data.data[0])       1. find layers of data with console   p.s. data.data[0] going into all the layers with out having to write out full notation everytime.
+        console.log(data);
+        // displayShow(data);
+    })
+
+}
+
+// function displayShow (result) {                 //displayShow(could.be.anything.grabbing data)
+//     const data = result.data
+
+    //  console.log("Title: " + data.title);      //2. comment out this while searching for data
+    //  console.log(\n"Release Year: " +);
+    //  console.log(\n"IMDB Rating: " +);                   //3. dot/bracket notation to find info
+    //  console.log(\n"Rotten Tomatoes Rating: " +);
+    //  console.log(\n"Produced In: " +);
+    //  console.log(\n"Language: " +);
+    //  console.log(\n"Plot: " +);
+    //  console.log(\n"Actors: " +);
+     
+}
+// }
+
     
-    function  MovieThis(title, year, imdb, rotten, language, plot, actors) {
-        var movieInfo = $(this).text('movie-this')
-        
-        var queryURL = "http://www.omdbapi.com/?i=tt3896198" +
-        
-        movieInfo + "&apikey=2f1e40d4";
 
 
-        this.title = title;
-        this.year = year;
-        this.imdb = imdb;
-        this.rotten = rotten;
-        this.language = language;
-        this.plot = plot;
-        this.actors = actors;
 
-        
-        axios({
-            url: queryURL,
-            method: 'get'
-          })
 
-          
-          MovieThis.prototype.showMovie = function() {
-              if ('movie-this') {
-                  
-                  console.log('Title: ' + this.title + '\nYear: ' + this.year + 
-                  '\nIMDB Rating: ' + this.imdb + '\nRotten Tomatoes Rating: ' 
-                  + this.rotten + '\nLanguage' + this.language + '\nPlot' + this.plot +
-                  '\nActors' + this.actors)
-                } else {
-                    console.log('There was an error...idk why')
-                }
-            };
-            
-        }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+switch (userChoice) {
+    case (userChoice == 'movie-this'):
+      movieThis()
+    break;
+    case (userChoice == 'spotify-this-song'):
+      SpOTiFyFuNcTiOn()
+    break;
+    case (userChoice == 'concert-this'):
+      CoNcErTfUnCtIoN()
+    break;
+    case (userChoice == 'do-what-it-says'):
+      wHaTiTsAySFuNcTiOn()
+    break;
+
+
+
+}
