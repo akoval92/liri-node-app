@@ -5,15 +5,12 @@ var Spotify = require("node-spotify-api")
 var spotifyClient = new Spotify(keys.spotify);
 var axios = require("axios");
 var userChoice = process.argv[2];
+var artist = process.argv.slice(3).join(' ');
 var seachMovie = process.argv.slice(3).join(' ');
-// console.log("userChoice" + userChoice)
-// console.log("searchmovie" + seachMovie)
 var validInput = checkUserInput()
 var searchSong = process.argv.slice(3).join(' ');
 // var moment = require('moment');
 // moment().format();
-
-// concert-this/spotify-this-song/movie-this/do-what-it-says   ---> commands
     
 
 function checkUserInput() {
@@ -25,26 +22,22 @@ function checkUserInput() {
     }
 }
 
+// Movie**
 
 function movieThis() {
-
 
     if (validInput) {
          movieUrl();
      }
 
-// Movie**
 
 function movieUrl() {
     var url = "http://www.omdbapi.com/?apikey=2f1e40d4&t=" + seachMovie 
-    // console.log(url)
-
     findMovieInfo(url)
 }
 
 function findMovieInfo(url) {
     axios.get(url).then(function(response){
-        // console.log(data.data.Title);
         displayMovieInfo(response.data);
     })
 
@@ -99,63 +92,47 @@ function spotifyUrl() {
 
 
 
-// // Concert*********
+
+
+//Concert********
+
+
+// function concertThis () {       //Not working :( *
+
 // if (validInput) {
-//     spotUrl();
-// }
-
-// function spotUrl() {
-//     var spoturl = "" + userChoice + "" + seachSpotify +
-//     "&apikey=2f1e40d4"
-
-//     findSpotifyInfo(spoturl)
+//     concertUrl();
 // }
 
 
-// function findSpotifyInfo(spoturl) {
-//     axios.get(spoturl).then(function(data){
-//         console.log(data);
-//         displaySpotifyInfo(data);
+// function concertUrl() {
+//     var bandUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+//     findConcertInfo(bandUrl)
+//     // console.log(bandUrl)
+// }
+
+// function findConcertInfo(bandUrl) {
+//     axios.get(bandUrl).then(function(response){
+//         displayConcertInfo(response.data);
+//         // console.log(response)
 //     })
-
 // }
 
-
-// function displaySpotifyInfo (result) {                
-//     const data = result.data
-
-//      console.log("Artist: " +);     
-//      console.log(\n"Song Name: " +);
-//      console.log(\n"Preview Song" +);                   
-//      console.log(\n"Album: " +);     
+// function displayConcertInfo (result) {
+//     console.log(result./*cannot find correct dot notation*/ )                         
 // }
+// }                                        //Not Working end******
 
 function cases (){
 
 if (userChoice == "movie-this") {
     movieThis();
-} else {
+} else if (userChoice == "spotify-this-song") {
     spotifyThisSong();
+} else if (userChoice == "concert-this") {
+    concertThis();
 }
-
 }
 
 cases();
 
-// switch (userChoice) {
-//     case (userChoice == 'movie-this'):
-//       movieThis()
-//     break;
-//     case (userChoice == 'spotify-this-song'):
-//       spotifyThisSong()
-//     break;
-//     case (userChoice == 'concert-this'):
-//       CoNcErTfUnCtIoN()
-//     break;
-//     case (userChoice == 'do-what-it-says'):
-//       wHaTiTsAySFuNcTiOn()
-//     break;
 
-
-
-// }
